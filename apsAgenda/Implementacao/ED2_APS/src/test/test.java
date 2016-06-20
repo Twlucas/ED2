@@ -80,10 +80,10 @@ public class test extends JFrame{
         add(passvord);
         add(cancel);
         add(loginT);
-        
+        add(button1);
         add(b1);
         add(back);
-        add(button1);
+        
         
           /*
         ---------------------------------------------------------------------------------------------------------

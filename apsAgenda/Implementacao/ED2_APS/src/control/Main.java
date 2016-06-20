@@ -5,8 +5,14 @@
  */
 package control;
 
+import test.NewJFrame;
+import test.TableFilterSorter;
+import test.TableSearch;
+import test.telatest;
 import test.test;
 import view.TelaAdd;
+import view.TelaInicial;
+import view.back;
 
 /**
  *
@@ -18,7 +24,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-    test l = new test();
+    /*test l = new test();
 
         l.setVisible(true);
         int k ;
@@ -39,7 +45,10 @@ public class Main {
         }
 
 
+    }*/
+        
+        //telatest tt= new telatest();
+        TelaInicial ti = new TelaInicial();
+        ti.setVisible(true);
     }
-
-
 }
