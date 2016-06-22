@@ -6,7 +6,7 @@
     import javax.swing.table.DefaultTableModel;
     import javax.swing.table.TableModel;
 
-    public class TableSearch extends javax.swing.JFrame {
+    public class TableSearch11 extends javax.swing.JFrame {
     Vector originalTableModel;
     DocumentListener documentListener;
     Object columnNames[] = { "Column One", "Column Two", "Column Three"};
@@ -23,7 +23,7 @@
       }			
     };
 
-    public TableSearch() {
+    public TableSearch11() {
         initComponents();
         table.setModel(dftm);
 
@@ -163,7 +163,7 @@
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new TableSearch().setVisible(true);
+                new TableSearch11().setVisible(true);
             }
         });
     }

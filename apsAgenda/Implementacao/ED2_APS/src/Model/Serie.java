@@ -14,7 +14,7 @@ import java.util.List;
  * @author Convidado
  */
 public class Serie {
-    private final int id;
+    private int id;
     private String nome;
     private List<String> generos;
     private int epAtual;
@@ -39,6 +39,10 @@ public class Serie {
     public Serie(int id) {
         this.id = id;
         generos = new ArrayList<>();
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     
@@ -138,5 +142,9 @@ public class Serie {
     
     public void addGenero(String s){
         this.generos.add(s);
+    }
+    
+    public Object[] getDados() {
+        return new Object[] {id, nome, epAtual};
     }
 }

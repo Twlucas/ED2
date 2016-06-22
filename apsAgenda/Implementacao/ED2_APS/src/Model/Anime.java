@@ -8,18 +8,23 @@ package model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 
 /**
  *
  * @author Convidado
  */
 public class Anime {
-    final int id;
+    private int id;
     private String nome;
     List<String> generos;
     private int epAtual;
     private int epTotal;
     private int nota;
+
+    public void setId(int id) {
+        this.id = id;
+    }
     private Produtora prod;
     private Date adicionado;
     private Date lançamento;
@@ -136,6 +141,10 @@ public class Anime {
 
     public void setDiaSemanaLançamento(String diaSemanaLançamento) {
         this.diaSemanaLançamento = diaSemanaLançamento;
+    }
+
+    public Object[] getDados() {
+        return new Object[] {id, nome, epAtual};
     }
     
 }

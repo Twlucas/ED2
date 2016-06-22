@@ -10,17 +10,17 @@ import test.*;
     public class TableSearch extends javax.swing.JFrame {
     Vector originalTableModel;
     DocumentListener documentListener;
-    /*Object columnNames[] = { "Column One", "Column Two", "Column Three"};
+   /* Object columnNames[] = { "Column One", "Column Two", "Column Three"};
     String[] colunas = new String[]{"Nome","Idade","Sexo"};
 
     String[][] dados = new String[][]{
         {"Rodrigo","28","Masculino"},
         {"Maria","30","Feminino"}
-    };
+    };*/
     //DefaultTableModel dftm= new DefaultTableModel(dados, columnNames);
-    */
+    
 
-    public TableSearch(String[][] dados, Object columnNames[]) {
+    public TableSearch(Object[][] dados, Object[] columnNames) {
         initComponents();
         DefaultTableModel dftm = new DefaultTableModel(dados, columnNames) {	
             public boolean isCellEditable(int rowIndex, int mColIndex){

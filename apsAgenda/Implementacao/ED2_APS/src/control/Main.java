@@ -6,9 +6,10 @@
 package control;
 
 import estrutura.ArvoreAvl;
+import model.Anime;
 import test.NewJFrame;
 import test.TableFilterSorter;
-import test.TableSearch;
+import test.TableSearch11;
 import test.telatest;
 import test.test;
 import view.TelaAdd;
@@ -55,10 +56,44 @@ public class Main {
         ts.setVisible(true);*/
         
         
-        Gerenciador gerenciador = new Gerenciador();
-        ArvoreAvl arvoreAvl = new ArvoreAvl();
+        Gerenciador ger = new Gerenciador();
+        /*ArvoreAvl arvoreAvl = new ArvoreAvl();
         TelaAdd telaAdd = new TelaAdd(arvoreAvl, gerenciador);
-        //back back1 = new back();
+        //back back1 = new back();*/
+        
+        Anime an = new Anime(10);
+        an.setDiaDeLançamento("12/10/1000");
+        an.setNome("aaa");
+        an.setEpAtual(1);
+        an.setEpTotal(5);
+        an.setEstado("assistindo");
+        an.setNota(10);
+        an.setObs("asdasd");
+        ger.getAnimes().inserir(10, an);
+        ger.getAllAnimes().add(an);
+        an = new Anime(5);
+        an.setDiaDeLançamento("12/10/1000");
+        an.setNome("abaa");
+        an.setEpAtual(1);
+        an.setEpTotal(5);
+        an.setEstado("assistindo");
+        an.setNota(5);
+        an.setObs("asdasd");
+        ger.getAnimes().inserir(5, an);
+        ger.getAnimeAtual().add(an);
+        ger.getAllAnimes().add(an);
+        an = new Anime(111);
+        an.setDiaDeLançamento("12/10/1000");
+        an.setNome("ca");
+        an.setEpAtual(1);
+        an.setEpTotal(5);
+        an.setEstado("assistindo");
+        an.setNota(2);
+        an.setObs("asdasd");
+        ger.getAnimeAtual().add(an);
+        ger.getAnimes().inserir(111, an);
+        ger.getAllAnimes().add(an);
+        TelaInicial tI = new TelaInicial(ger);
         
     }
 }

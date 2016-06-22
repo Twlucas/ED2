@@ -1,30 +1,30 @@
 package estrutura;
 
 import java.util.ArrayList;
+import model.Anime;
+import model.Filme;
+import model.Serie;
 
 public class ArvoreAvl {
 
     private No raiz;
 
-    public void criarArvoreTeste() {
-        inserir(15);
-        inserir(27);
-        inserir(49);
-        inserir(10);
-        inserir(8);
-        inserir(67);
-        inserir(59);
-        inserir(9);
-        inserir(13);
-        inserir(20);
-        inserir(14);
-    }
     public void resetArvore(){
         this.raiz = null;
     }
 
-    public void inserir(int k) {
-        No n = new No(k);
+    public void inserir(int k, Anime anime) {
+        No n = new No(k, anime);
+        inserirAVL(this.raiz, n);
+    }
+    
+    public void inserir(int k, Serie serie) {
+        No n = new No(k, serie);
+        inserirAVL(this.raiz, n);
+    }
+    
+    public void inserir(int k, Filme filme) {
+        No n = new No(k, filme);
         inserirAVL(this.raiz, n);
     }
 

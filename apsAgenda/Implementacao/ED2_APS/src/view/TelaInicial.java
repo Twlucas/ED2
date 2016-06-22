@@ -5,17 +5,43 @@
  */
 package view;
 
+import control.Gerenciador;
+import estrutura.No;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import table.TableSearch;
+import view.exibicao.ExibirResultado;
+
 /**
  *
  * @author Convidado
  */
 public class TelaInicial extends javax.swing.JFrame {
 
+    
+    
+    Gerenciador ger;
     /**
      * Creates new form TelaInicial
      */
-    public TelaInicial() {
+    public TelaInicial(Gerenciador ger) {
         initComponents();
+        this.ger = ger;
+        this.populateTable();
+        this.setVisible(true);
+    }
+    
+    private void populateTable(){
+        DefaultTableModel tbm= (DefaultTableModel) jTAtual.getModel();
+        while(tbm.getRowCount() > 0){
+            tbm.removeRow(0);
+        }        
+        for (int i = 0; i < ger.getAnimeAtual().size(); i++) {
+            tbm.addRow(ger.getAnimeAtual().get(i).getDados());
+        }
+        for (int i = 0; i < ger.getSerieAtual().size(); i++) {
+            tbm.addRow(ger.getSerieAtual().get(i).getDados());
+        }
     }
 
     /**
@@ -34,8 +60,11 @@ public class TelaInicial extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTAtual = new javax.swing.JTable();
+        jButton4 = new javax.swing.JButton();
+        jbAdd1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmCadastro = new javax.swing.JMenu();
         jmBiblioteca = new javax.swing.JMenu();
@@ -61,7 +90,7 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/search32.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/book32.png"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -73,50 +102,67 @@ public class TelaInicial extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Continuar à assistir"));
 
-        jTable2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Current")), "Current", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTAtual.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nome", "Episodio"
+                "Id", "Nome", "Episodio"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(jTable2);
-        jTable2.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        ));
+        jScrollPane1.setViewportView(jTAtual);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 425, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE))
         );
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/search32.png"))); // NOI18N
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jbAdd1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add32.png"))); // NOI18N
+        jbAdd1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAdd1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Imcrementar episódio Atual");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jbAdd1)
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jbAdd)
-                        .addGap(56, 56, 56)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jbAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -126,19 +172,23 @@ public class TelaInicial extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jbAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jbAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jbAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3)
+                            .addComponent(jButton4))
+                        .addGap(12, 12, 12)
                         .addComponent(jLabel2))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jbAdd1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -161,64 +211,89 @@ public class TelaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAddActionPerformed
-        //TelaAdd telaAdd = new TelaAdd();
-        //telaAdd.setVisible(true);
+        TelaAdd1 telaAdd1 = new TelaAdd1(ger);
+        telaAdd1.setModal(true);
+        this.populateTable();
     }//GEN-LAST:event_jbAddActionPerformed
 
     private void jbAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgendaActionPerformed
-        // TODO add your handling code here:
+        this.populateTable();
     }//GEN-LAST:event_jbAgendaActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        String[][] dados = new String[3][200];
+        String[] colunas = {"ID", "Nome", "Nota"};
+        int cont = 0;
+        for (int i = 0; i < ger.getAllAnimes().size(); i++) {
+            dados[cont][0]=String.valueOf(ger.getAllAnimes().get(i).getId());
+            dados[cont][1]=ger.getAllAnimes().get(i).getNome();
+            dados[cont][2]=String.valueOf(ger.getAllAnimes().get(i).getNota());
+            cont++;
+        }
+        for (int i = 0; i < ger.getAllSeries().size(); i++) {
+            dados[cont][0]=String.valueOf(ger.getAllSeries().get(i).getId());
+            dados[cont][1]=ger.getAllSeries().get(i).getNome();
+            dados[cont][2]=String.valueOf(ger.getAllSeries().get(i).getNota());
+        }
+        for (int i = 0; i < ger.getAllFilmes().size(); i++) {
+            dados[cont][0]=String.valueOf(ger.getAllFilmes().get(i).getId());
+            dados[cont][1]=ger.getAllFilmes().get(i).getNome();
+            dados[cont][2]=String.valueOf(ger.getAllFilmes().get(i).getNota());
+        }
+        TableSearch tableSearch = new TableSearch(dados, colunas);
+        tableSearch.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        int id = Integer.valueOf(JOptionPane.showInputDialog(null, "ID:","Imforme o ID",JOptionPane.INFORMATION_MESSAGE));
+        ExibirResultado er;
+        //System.out.println(id);
+        No no;
+        if((no = ger.getAnimes().procuraChave(id, ger.getAnimes().getRaiz())) != null){
+            er= new ExibirResultado(no.getAnime());
+        }else
+            if((no = ger.getSeries().procuraChave(id, ger.getSeries().getRaiz())) != null){
+                System.out.println(no.getChave());
+                er= new ExibirResultado(no.getSerie());
+            }
+            else
+                if((no = ger.getFilmes().procuraChave(id, ger.getFilmes().getRaiz())) != null){
+                er= new ExibirResultado(no.getFilme());
+            }else{
+                    JOptionPane.showMessageDialog(null, "Não encontrado", "Erro", 3);
                 }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaInicial().setVisible(true);
-            }
-        });
-    }
+    private void jbAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAdd1ActionPerformed
+        int aep= (int) jTAtual.getValueAt(jTAtual.getSelectedRow(), 2);
+        aep++;
+        jTAtual.setValueAt(aep, jTAtual.getSelectedRow(), 2);
+        No no;
+        int pos = (int) jTAtual.getValueAt(jTAtual.getSelectedRow(), 0);
+        if((no = ger.getAnimes().procuraChave(pos, ger.getAnimes().getRaiz())) != null){
+            no.getAnime().setEpAtual(aep);
+        }else{
+            no = ger.getSeries().procuraChave(pos, ger.getSeries().getRaiz());
+            no.getSerie().setEpAtual(aep);
+        }
+    }//GEN-LAST:event_jbAdd1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTAtual;
     private javax.swing.JButton jbAdd;
+    private javax.swing.JButton jbAdd1;
     private javax.swing.JButton jbAgenda;
     private javax.swing.JMenu jmBiblioteca;
     private javax.swing.JMenu jmCadastro;

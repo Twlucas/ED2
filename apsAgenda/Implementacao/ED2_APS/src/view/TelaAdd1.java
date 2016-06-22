@@ -6,28 +6,20 @@
 package view;
 
 import control.Gerenciador;
-import estrutura.ArvoreAvl;
-import java.awt.Font;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 import model.Anime;
 import model.Filme;
 import model.Produtora;
 import model.Serie;
+
 /**
  *
  * @author Convidado
  */
-public class TelaAdd extends javax.swing.JFrame {
-   // private JButton loginTela = new JButton("hoi");
+public class TelaAdd1 extends javax.swing.JDialog {
+// private JButton loginTela = new JButton("hoi");
     //JPanel jp = new JPanel();
     //JLabel lb =new JLabel();
     private Gerenciador ger;
@@ -42,8 +34,9 @@ public class TelaAdd extends javax.swing.JFrame {
      * @param avl
      * @param ger
      */
-    public TelaAdd(Gerenciador ger) {
+    public TelaAdd1(Gerenciador ger) {
         initComponents();
+        this.setModal(true);
         this.ger = ger;
         this.an = new Anime(ger.getTamAnime());
         this.fil = new Filme(ger.getTamFilme());
@@ -73,6 +66,10 @@ public class TelaAdd extends javax.swing.JFrame {
         this.jTFProdutora.setText("");
         this.jTFTotalEp.setText("");
     }
+    /**
+     * Creates new form TelaAdd1
+     */
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -114,9 +111,7 @@ public class TelaAdd extends javax.swing.JFrame {
         jPNome1 = new javax.swing.JPanel();
         jTFId = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel33.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -427,41 +422,53 @@ public class TelaAdd extends javax.swing.JFrame {
 
         jTBPane3.addTab("Geral", jPanel33);
 
-        getContentPane().add(jTBPane3);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jTBPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 411, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jTBPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCBStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBStatusActionPerformed
-       String t = String.valueOf(jCBStatus.getSelectedItem());
+        String t = String.valueOf(jCBStatus.getSelectedItem());
         switch (t) {
             case "Assistindo":
-                jPEpisode.setVisible(true);
-                this.an.setEstado(t);
-                this.fil.setEstado(t);
-                this.ser.setEstado(t);
-                break;
+            jPEpisode.setVisible(true);
+            this.an.setEstado(t);
+            this.fil.setEstado(t);
+            this.ser.setEstado(t);
+            break;
             case "Status":
-                jPEpisode.setVisible(false);
-                this.an.setEstado("Plano de Assistir");
-                this.fil.setEstado("Plano de Assistir");
-                this.ser.setEstado("Plano de Assistir");
-                break;
+            jPEpisode.setVisible(false);
+            this.an.setEstado("Plano de Assistir");
+            this.fil.setEstado("Plano de Assistir");
+            this.ser.setEstado("Plano de Assistir");
+            break;
             default:
-                jPEpisode.setVisible(false);
-                this.an.setEstado(t);
-                this.fil.setEstado(t);
-                this.ser.setEstado(t);
-                break;
+            jPEpisode.setVisible(false);
+            this.an.setEstado(t);
+            this.fil.setEstado(t);
+            this.ser.setEstado(t);
+            break;
         }
     }//GEN-LAST:event_jCBStatusActionPerformed
-
-    private void jCBNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBNotaActionPerformed
-        
-        int nota;
-        nota = Integer.valueOf(String.valueOf(jCBNota.getSelectedItem()));
-        this.an.setNota(nota);
-    }//GEN-LAST:event_jCBNotaActionPerformed
 
     private void jTFTotalEpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFTotalEpActionPerformed
         // TODO add your handling code here:
@@ -471,11 +478,86 @@ public class TelaAdd extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFAtualEpActionPerformed
 
+    private void jCBNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBNotaActionPerformed
+
+        int nota;
+        nota = Integer.valueOf(String.valueOf(jCBNota.getSelectedItem()));
+        this.an.setNota(nota);
+    }//GEN-LAST:event_jCBNotaActionPerformed
+
+    private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
+        this.an.setNome(jTFNome.getText());
+        this.fil.setNome(jTFNome.getText());
+        this.ser.setNome(jTFNome.getText());
+
+        this.prod = new Produtora(jTFProdutora.getText());
+        this.an.setProd(prod);
+        this.ser.setProd(prod);
+        this.fil.setProd(prod);
+
+        this.an.setObs(jTFComent.getText());
+        this.fil.setObs(jTFComent.getText());
+        this.ser.setObs(jTFComent.getText());
+
+        if(jCBStatus.getSelectedItem().equals("Assistindo")){
+            this.an.setEpAtual(Integer.valueOf(jTFAtualEp.getText()));
+            this.an.setEpTotal(Integer.valueOf(jTFTotalEp.getText()));
+            this.ser.setEpAtual(Integer.valueOf(jTFAtualEp.getText()));
+            this.ser.setEpTotal(Integer.valueOf(jTFTotalEp.getText()));
+        }
+        if(jCBSem.isSelected()){
+            SimpleDateFormat sf = new SimpleDateFormat("EEEE");
+            String diaSemana = sf.format(jXDate.getDate());
+            this.an.setDiaSemanaLançamento(diaSemana);
+            this.ser.setDiaSemanaLançamento(diaSemana);
+        }
+
+        an.setId(Integer.valueOf(jTFId.getText()));
+        ser.setId(Integer.valueOf(jTFId.getText()));
+        fil.setId(Integer.valueOf(jTFId.getText()));
+        switch (tipo){
+            case "Serie":
+            ger.getSeries().inserir(ser.getId(), ser);
+            ger.getAllSeries().add(ser);
+            ger.setTamSerie(ger.getTamSerie()+1);
+            if(jCBStatus.getSelectedItem().equals("Assistindo")){
+                ger.getSerieAtual().add(ser);
+            }
+            break;
+            case "Filme":
+            ger.getFilmes().inserir(fil.getId(), fil);
+            ger.getAllFilmes().add(fil);
+            ger.setTamFilme(ger.getTamFilme()+1);
+            break;
+            case "Anime":
+            ger.getAnimes().inserir(an.getId(), an);
+            ger.getAllAnimes().add(an);
+            ger.setTamAnime(ger.getTamAnime()+1);
+            if(jCBStatus.getSelectedItem().equals("Assistindo")){
+                ger.getAnimeAtual().add(an);
+            }
+            break;
+            default :
+            ger.getSeries().inserir(ser.getId(), ser);
+            ger.getAllSeries().add(ser);
+            ger.setTamSerie(ger.getTamSerie()+1);
+            break;
+        }
+
+        JOptionPane.showMessageDialog(null, "Salvo com sucesso!!!", "Sucesso", 1);
+        this.setFalse();
+
+    }//GEN-LAST:event_jBSalvarActionPerformed
+
+    private void jBCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jBCancelActionPerformed
+
     private void jCBTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBTipoActionPerformed
         String s = String.valueOf(jCBTipo.getSelectedItem());
         tipo = s;
     }//GEN-LAST:event_jCBTipoActionPerformed
-    private JLabel getFirstJLFree(){
+private JLabel getFirstJLFree(){
         if(!jLGenero1.isVisible()){
             return jLGenero1;
         }
@@ -510,196 +592,131 @@ public class TelaAdd extends javax.swing.JFrame {
         return null;
     }
     private void jCBGenerosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBGenerosActionPerformed
-       
+
         String s =String.valueOf(jCBGeneros.getSelectedItem());
 
         switch (s) {
             case "Ação":
-                if(this.getFirstJLFree()!=null){
-                    this.getFirstJLFree().setText("Ação");
-                    this.getFirstJLFree().setVisible(true);
-                    this.an.addGenero(s);
-                    this.fil.addGenero(s);
-                    this.ser.addGenero(s);
-                }
-                
-                break;
+            if(this.getFirstJLFree()!=null){
+                this.getFirstJLFree().setText("Ação");
+                this.getFirstJLFree().setVisible(true);
+                this.an.addGenero(s);
+                this.fil.addGenero(s);
+                this.ser.addGenero(s);
+            }
+
+            break;
             case "Animação":
-                if(this.getFirstJLFree()!=null){
+            if(this.getFirstJLFree()!=null){
                 this.getFirstJLFree().setText("Animação");
                 this.getFirstJLFree().setVisible(true);
-                    this.an.addGenero(s);
-                    this.fil.addGenero(s);
-                    this.ser.addGenero(s);
-                }
-                break;
+                this.an.addGenero(s);
+                this.fil.addGenero(s);
+                this.ser.addGenero(s);
+            }
+            break;
             case "Aventura":
-                if(this.getFirstJLFree()!=null){
+            if(this.getFirstJLFree()!=null){
                 this.getFirstJLFree().setText("Aventura");
                 this.getFirstJLFree().setVisible(true);
-                    this.an.addGenero(s);
-                    this.fil.addGenero(s);
-                    this.ser.addGenero(s);
-                }
-                break;
+                this.an.addGenero(s);
+                this.fil.addGenero(s);
+                this.ser.addGenero(s);
+            }
+            break;
             case "Classico":
-                if(this.getFirstJLFree()!=null){
+            if(this.getFirstJLFree()!=null){
                 this.getFirstJLFree().setText("Classico");
                 this.getFirstJLFree().setVisible(true);
-                    this.an.addGenero(s);
-                    this.fil.addGenero(s);
-                    this.ser.addGenero(s);
-                }
-                break;
+                this.an.addGenero(s);
+                this.fil.addGenero(s);
+                this.ser.addGenero(s);
+            }
+            break;
             case "Comédia":
-                if(this.getFirstJLFree()!=null){
+            if(this.getFirstJLFree()!=null){
                 this.getFirstJLFree().setText("Comédia");
                 this.getFirstJLFree().setVisible(true);
-                    this.an.addGenero(s);
-                    this.fil.addGenero(s);
-                    this.ser.addGenero(s);
-                }
-                break;
+                this.an.addGenero(s);
+                this.fil.addGenero(s);
+                this.ser.addGenero(s);
+            }
+            break;
             case "Crime":
-                if(this.getFirstJLFree()!=null){
+            if(this.getFirstJLFree()!=null){
                 this.getFirstJLFree().setText("Crime");
                 this.getFirstJLFree().setVisible(true);
-                    this.an.addGenero(s);
-                    this.fil.addGenero(s);
-                    this.ser.addGenero(s);
-                }
-                break;
+                this.an.addGenero(s);
+                this.fil.addGenero(s);
+                this.ser.addGenero(s);
+            }
+            break;
             case "Drama":
-                if(this.getFirstJLFree()!=null){
+            if(this.getFirstJLFree()!=null){
                 this.getFirstJLFree().setText("Drama");
                 this.getFirstJLFree().setVisible(true);
-                    this.an.addGenero(s);
-                    this.fil.addGenero(s);
-                    this.ser.addGenero(s);
-                }
-                break;
+                this.an.addGenero(s);
+                this.fil.addGenero(s);
+                this.ser.addGenero(s);
+            }
+            break;
             case "Fantasia":
-                if(this.getFirstJLFree()!=null){
+            if(this.getFirstJLFree()!=null){
                 this.getFirstJLFree().setText("Fantasia");
                 this.getFirstJLFree().setVisible(true);
-                    this.an.addGenero(s);
-                    this.fil.addGenero(s);
-                    this.ser.addGenero(s);
-                }
-                break;
+                this.an.addGenero(s);
+                this.fil.addGenero(s);
+                this.ser.addGenero(s);
+            }
+            break;
             case "Ficção Científica":
-                if(this.getFirstJLFree()!=null){
+            if(this.getFirstJLFree()!=null){
                 this.getFirstJLFree().setText("Ficção");
                 this.getFirstJLFree().setVisible(true);
-                    this.an.addGenero(s);
-                    this.fil.addGenero(s);
-                    this.ser.addGenero(s);
-                }
-                break;
+                this.an.addGenero(s);
+                this.fil.addGenero(s);
+                this.ser.addGenero(s);
+            }
+            break;
             case "Guerra":
-                if(this.getFirstJLFree()!=null){
+            if(this.getFirstJLFree()!=null){
                 this.getFirstJLFree().setText("Guerra");
                 this.getFirstJLFree().setVisible(true);
-                    this.an.addGenero(s);
-                    this.fil.addGenero(s);
-                    this.ser.addGenero(s);
-                }
-                break;
+                this.an.addGenero(s);
+                this.fil.addGenero(s);
+                this.ser.addGenero(s);
+            }
+            break;
             case "Mistério":
-                if(this.getFirstJLFree()!=null){
+            if(this.getFirstJLFree()!=null){
                 this.getFirstJLFree().setText("Mistério");
                 this.getFirstJLFree().setVisible(true);
-                    this.an.addGenero(s);
-                    this.fil.addGenero(s);
-                    this.ser.addGenero(s);
-                }
-                break;
+                this.an.addGenero(s);
+                this.fil.addGenero(s);
+                this.ser.addGenero(s);
+            }
+            break;
             case "Suspense":
-                if(this.getFirstJLFree()!=null){
+            if(this.getFirstJLFree()!=null){
                 this.getFirstJLFree().setText("Suspense");
                 this.getFirstJLFree().setVisible(true);
-                    this.an.addGenero(s);
-                    this.fil.addGenero(s);
-                    this.ser.addGenero(s);
-                }
-                break;
+                this.an.addGenero(s);
+                this.fil.addGenero(s);
+                this.ser.addGenero(s);
+            }
+            break;
             case "Horror":
-                if(this.getFirstJLFree()!=null){
+            if(this.getFirstJLFree()!=null){
                 this.getFirstJLFree().setText("Horror");
                 this.getFirstJLFree().setVisible(true);
-                    this.an.addGenero(s);
-                    this.fil.addGenero(s);
-                    this.ser.addGenero(s);
-                }
-                break;
-                                        
+                this.an.addGenero(s);
+                this.fil.addGenero(s);
+                this.ser.addGenero(s);
+            }
+            break;
+
         }
     }//GEN-LAST:event_jCBGenerosActionPerformed
-
-    private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
-        this.an.setNome(jTFNome.getText());
-        this.fil.setNome(jTFNome.getText());
-        this.ser.setNome(jTFNome.getText());
-        
-        this.prod = new Produtora(jTFProdutora.getText());
-        this.an.setProd(prod);
-        this.ser.setProd(prod);
-        this.fil.setProd(prod);
-        
-        this.an.setObs(jTFComent.getText());
-        this.fil.setObs(jTFComent.getText());
-        this.ser.setObs(jTFComent.getText());
-        
-        if(jCBStatus.getSelectedItem().equals("Assistindo")){
-            this.an.setEpAtual(Integer.valueOf(jTFAtualEp.getText()));
-            this.an.setEpTotal(Integer.valueOf(jTFTotalEp.getText()));
-            this.ser.setEpAtual(Integer.valueOf(jTFAtualEp.getText()));
-            this.ser.setEpTotal(Integer.valueOf(jTFTotalEp.getText()));
-        }
-        if(jCBSem.isSelected()){
-            SimpleDateFormat sf = new SimpleDateFormat("EEEE");
-            String diaSemana = sf.format(jXDate.getDate());
-            this.an.setDiaSemanaLançamento(diaSemana);
-            this.ser.setDiaSemanaLançamento(diaSemana);
-        }
-        
-        an.setId(Integer.valueOf(jTFId.getText()));
-        ser.setId(Integer.valueOf(jTFId.getText()));
-        fil.setId(Integer.valueOf(jTFId.getText()));
-        switch (tipo){
-            case "Serie":
-                ger.getSeries().inserir(ser.getId(), ser);
-                ger.getAllSeries().add(ser);
-                ger.setTamSerie(ger.getTamSerie()+1);
-                if(jCBStatus.getSelectedItem().equals("Assistindo")){
-                    ger.getSerieAtual().add(ser);
-                }
-                break;
-            case "Filme":
-                ger.getFilmes().inserir(fil.getId(), fil);
-                ger.getAllFilmes().add(fil);
-                ger.setTamFilme(ger.getTamFilme()+1);
-                break;
-            case "Anime":
-                ger.getAnimes().inserir(an.getId(), an);
-                ger.getAllAnimes().add(an);
-                ger.setTamAnime(ger.getTamAnime()+1);
-                if(jCBStatus.getSelectedItem().equals("Assistindo")){
-                    ger.getAnimeAtual().add(an);
-                }
-                break;
-            default :
-                ger.getSeries().inserir(ser.getId(), ser);
-                ger.getAllSeries().add(ser);
-                ger.setTamSerie(ger.getTamSerie()+1);
-                break;
-        }
-        
-        JOptionPane.showMessageDialog(null, "Salvo com sucesso!!!", "Sucesso", 1);
-        this.setFalse();
-        
-        
-    }//GEN-LAST:event_jBSalvarActionPerformed
 
     private void jXDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDateActionPerformed
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -708,17 +725,10 @@ public class TelaAdd extends javax.swing.JFrame {
     }//GEN-LAST:event_jXDateActionPerformed
 
     private void jCBSemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBSemActionPerformed
-        
+
     }//GEN-LAST:event_jCBSemActionPerformed
 
-    private void jBCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jBCancelActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCancel;
     private javax.swing.JButton jBSalvar;
@@ -752,5 +762,4 @@ public class TelaAdd extends javax.swing.JFrame {
     private javax.swing.JTextField jTFTotalEp;
     private org.jdesktop.swingx.JXDatePicker jXDate;
     // End of variables declaration//GEN-END:variables
-
 }

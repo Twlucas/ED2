@@ -15,7 +15,7 @@ import java.util.List;
  * @author Convidado
  */
 public class Filme {
-    final int id;
+     int id;
     private String nome;
     private List<String> generos;
     private Double duracao;
@@ -33,6 +33,10 @@ public class Filme {
 
     public void setObs(String obs) {
         this.obs = obs;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
     public void addGenero(String s){

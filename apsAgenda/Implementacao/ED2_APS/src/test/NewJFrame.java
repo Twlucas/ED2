@@ -17,7 +17,7 @@ public class NewJFrame extends javax.swing.JFrame {
     public NewJFrame() {
         initComponents();
         
-        new TableSearch().setVisible(true);
+        new TableSearch11().setVisible(true);
     }
 
     /**
