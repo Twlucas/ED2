@@ -1,5 +1,6 @@
-    package test;
+    package table;
 
+import test.*;
     import java.util.Vector;
     import javax.swing.event.DocumentEvent;
     import javax.swing.event.DocumentListener;
@@ -9,7 +10,7 @@
     public class TableSearch extends javax.swing.JFrame {
     Vector originalTableModel;
     DocumentListener documentListener;
-    Object columnNames[] = { "Column One", "Column Two", "Column Three"};
+    /*Object columnNames[] = { "Column One", "Column Two", "Column Three"};
     String[] colunas = new String[]{"Nome","Idade","Sexo"};
 
     String[][] dados = new String[][]{
@@ -17,14 +18,15 @@
         {"Maria","30","Feminino"}
     };
     //DefaultTableModel dftm= new DefaultTableModel(dados, columnNames);
-    DefaultTableModel dftm = new DefaultTableModel(dados, columnNames) {	
-      public boolean isCellEditable(int rowIndex, int mColIndex){
-            return false;
-      }			
-    };
+    */
 
-    public TableSearch() {
+    public TableSearch(String[][] dados, Object columnNames[]) {
         initComponents();
+        DefaultTableModel dftm = new DefaultTableModel(dados, columnNames) {	
+            public boolean isCellEditable(int rowIndex, int mColIndex){
+                return false;
+            }			
+        };
         table.setModel(dftm);
 
         setLocationRelativeTo(null);
@@ -158,15 +160,15 @@
         }
     }
 
-    public static void main(String args[]) {
-        /* Create and display the form */
+    /*public static void main(String args[]) {
+        /* Create and display the form 
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 new TableSearch().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify                     
     private javax.swing.JPanel jPanel1;

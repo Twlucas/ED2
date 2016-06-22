@@ -5,26 +5,48 @@
  */
 package view;
 
+import control.Gerenciador;
+import estrutura.ArvoreAvl;
 import java.awt.Font;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import model.Anime;
+import model.Filme;
+import model.Produtora;
+import model.Serie;
 /**
  *
  * @author Convidado
  */
 public class TelaAdd extends javax.swing.JFrame {
-    JButton loginTela = new JButton("hoi");
-    JPanel jp = new JPanel();
-    JLabel lb =new JLabel();
-    
+   // private JButton loginTela = new JButton("hoi");
+    //JPanel jp = new JPanel();
+    //JLabel lb =new JLabel();
+    private Gerenciador ger;
+    private Anime an;
+    private Serie ser;
+    private Filme fil;
+    private Produtora prod;
+    private ArvoreAvl avl;
+    private String tipo;
     
     /**
      * Creates new form TelaAdd
+     * @param avl
+     * @param ger
      */
-    public TelaAdd() {
+    public TelaAdd(ArvoreAvl avl, Gerenciador ger) {
         initComponents();
+        this.avl = avl;
+        this.ger = ger;
         jPEpisode.setVisible(false);
         this.jLGenero1.setVisible(false);
         this.jLGenero2.setVisible(false);
@@ -34,7 +56,12 @@ public class TelaAdd extends javax.swing.JFrame {
         this.jLGenero6.setVisible(false);
         this.jLGenero7.setVisible(false);
         this.jLGenero8.setVisible(false);
+        this.an = new Anime(ger.getAll().size());
+        this.fil = new Filme(ger.getAll().size());
+        this.ser = new Serie(ger.getAll().size());
+        this.setVisible(true);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,12 +79,12 @@ public class TelaAdd extends javax.swing.JFrame {
         jCBStatus = new javax.swing.JComboBox();
         jPEpisode = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField14 = new javax.swing.JTextField();
-        jTextField17 = new javax.swing.JTextField();
+        jTFTotalEp = new javax.swing.JTextField();
+        jTFAtualEp = new javax.swing.JTextField();
         jCBNota = new javax.swing.JComboBox();
         jLGenero1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jBSalvar = new javax.swing.JButton();
+        jBCancel = new javax.swing.JButton();
         jCBTipo = new javax.swing.JComboBox();
         jCBGeneros = new javax.swing.JComboBox();
         jLGenero2 = new javax.swing.JLabel();
@@ -67,14 +94,13 @@ public class TelaAdd extends javax.swing.JFrame {
         jLGenero5 = new javax.swing.JLabel();
         jLGenero8 = new javax.swing.JLabel();
         jLGenero7 = new javax.swing.JLabel();
-        jCBDia = new javax.swing.JComboBox();
-        jCBMes = new javax.swing.JComboBox();
-        jCBAno = new javax.swing.JComboBox();
-        jComboBox1 = new javax.swing.JComboBox();
         jPProdutora = new javax.swing.JPanel();
         jTFProdutora = new javax.swing.JTextField();
         jPComent = new javax.swing.JPanel();
         jTFComent = new javax.swing.JTextField();
+        jPData1 = new javax.swing.JPanel();
+        jXDate = new org.jdesktop.swingx.JXDatePicker();
+        jCBSem = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -112,17 +138,17 @@ public class TelaAdd extends javax.swing.JFrame {
 
         jLabel1.setText("/");
 
-        jTextField14.setBorder(null);
-        jTextField14.addActionListener(new java.awt.event.ActionListener() {
+        jTFTotalEp.setBorder(null);
+        jTFTotalEp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField14ActionPerformed(evt);
+                jTFTotalEpActionPerformed(evt);
             }
         });
 
-        jTextField17.setBorder(null);
-        jTextField17.addActionListener(new java.awt.event.ActionListener() {
+        jTFAtualEp.setBorder(null);
+        jTFAtualEp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField17ActionPerformed(evt);
+                jTFAtualEpActionPerformed(evt);
             }
         });
 
@@ -131,19 +157,19 @@ public class TelaAdd extends javax.swing.JFrame {
         jPEpisodeLayout.setHorizontalGroup(
             jPEpisodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPEpisodeLayout.createSequentialGroup()
-                .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTFAtualEp, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTFTotalEp, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         jPEpisodeLayout.setVerticalGroup(
             jPEpisodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPEpisodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel1)
-                .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jTFTotalEp, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTFAtualEp, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jCBNota.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nota", "9", "8", "7", "6", "5", "4", "3", "2", "1" }));
@@ -156,9 +182,14 @@ public class TelaAdd extends javax.swing.JFrame {
 
         jLGenero1.setText("jLabel7");
 
-        jButton1.setText("Salvar");
+        jBSalvar.setText("Salvar");
+        jBSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalvarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Cancelar");
+        jBCancel.setText("Cancelar");
 
         jCBTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Serie", "Anime", "Cartoon", "Filme", "Outros" }));
         jCBTipo.setToolTipText("");
@@ -189,32 +220,6 @@ public class TelaAdd extends javax.swing.JFrame {
         jLGenero8.setText("jLabel7");
 
         jLGenero7.setText("jLabel7");
-
-        jCBDia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Dia", "9", "8", "7", "6", "5", "4", "3", "2", "1" }));
-        jCBDia.setToolTipText("");
-        jCBDia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBDiaActionPerformed(evt);
-            }
-        });
-
-        jCBMes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mês", "9", "8", "7", "6", "5", "4", "3", "2", "1" }));
-        jCBMes.setToolTipText("");
-        jCBMes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBMesActionPerformed(evt);
-            }
-        });
-
-        jCBAno.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ano", "9", "8", "7", "6", "5", "4", "3", "2", "1" }));
-        jCBAno.setToolTipText("");
-        jCBAno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBAnoActionPerformed(evt);
-            }
-        });
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Data", "Semanalmente", "Data de Lançamento" }));
 
         jPProdutora.setBackground(new java.awt.Color(255, 255, 255));
         jPProdutora.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Produtora"));
@@ -248,6 +253,38 @@ public class TelaAdd extends javax.swing.JFrame {
             .addComponent(jTFComent, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
         );
 
+        jPData1.setBackground(new java.awt.Color(255, 255, 255));
+        jPData1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Data de Lançamento"));
+
+        jXDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jXDateActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPData1Layout = new javax.swing.GroupLayout(jPData1);
+        jPData1.setLayout(jPData1Layout);
+        jPData1Layout.setHorizontalGroup(
+            jPData1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPData1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jXDate, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPData1Layout.setVerticalGroup(
+            jPData1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPData1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jXDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jCBSem.setBackground(new java.awt.Color(255, 255, 255));
+        jCBSem.setText("Semanalmente");
+        jCBSem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBSemActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel33Layout = new javax.swing.GroupLayout(jPanel33);
         jPanel33.setLayout(jPanel33Layout);
         jPanel33Layout.setHorizontalGroup(
@@ -276,7 +313,7 @@ public class TelaAdd extends javax.swing.JFrame {
                         .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLGenero8, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLGenero4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 32, Short.MAX_VALUE))
                     .addGroup(jPanel33Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jCBStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -288,45 +325,40 @@ public class TelaAdd extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPComent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel33Layout.createSequentialGroup()
-                                .addComponent(jCBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCBDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCBMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCBAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                                .addComponent(jCBNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel33Layout.createSequentialGroup()
-                                .addGap(91, 91, 91)
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jPComent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel33Layout.createSequentialGroup()
+                                        .addComponent(jCBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jPData1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jCBSem))
+                                    .addGroup(jPanel33Layout.createSequentialGroup()
+                                        .addGap(91, 91, 91)
+                                        .addComponent(jBSalvar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jBCancel)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jCBNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel33Layout.setVerticalGroup(
             jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel33Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jCBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jCBDia)
-                        .addComponent(jCBMes))
-                    .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jCBNota, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jCBAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPData1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCBTipo, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jCBNota))
+                    .addGroup(jPanel33Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jCBSem)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPProdutora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jCBStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -348,8 +380,8 @@ public class TelaAdd extends javax.swing.JFrame {
                 .addComponent(jPComent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jBSalvar)
+                    .addComponent(jBCancel))
                 .addContainerGap())
         );
 
@@ -361,29 +393,47 @@ public class TelaAdd extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCBStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBStatusActionPerformed
-       
-        if(jCBStatus.getSelectedItem().equals("Assistindo")){
-            jPEpisode.setVisible(true);
-        }
-        else /*if(jCBStatus.getSelectedItem().equals("Status"))*/{
-            jPEpisode.setVisible(false);
+       String t = String.valueOf(jCBStatus.getSelectedItem());
+        switch (t) {
+            case "Assistindo":
+                jPEpisode.setVisible(true);
+                this.an.setEstado(t);
+                this.fil.setEstado(t);
+                this.ser.setEstado(t);
+                break;
+            case "Status":
+                jPEpisode.setVisible(false);
+                this.an.setEstado("Plano de Assistir");
+                this.fil.setEstado("Plano de Assistir");
+                this.ser.setEstado("Plano de Assistir");
+                break;
+            default:
+                jPEpisode.setVisible(false);
+                this.an.setEstado(t);
+                this.fil.setEstado(t);
+                this.ser.setEstado(t);
+                break;
         }
     }//GEN-LAST:event_jCBStatusActionPerformed
 
     private void jCBNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBNotaActionPerformed
-        // TODO add your handling code here:
+        
+        int nota;
+        nota = Integer.valueOf(String.valueOf(jCBNota.getSelectedItem()));
+        this.an.setNota(nota);
     }//GEN-LAST:event_jCBNotaActionPerformed
 
-    private void jTextField14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField14ActionPerformed
+    private void jTFTotalEpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFTotalEpActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField14ActionPerformed
+    }//GEN-LAST:event_jTFTotalEpActionPerformed
 
-    private void jTextField17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField17ActionPerformed
+    private void jTFAtualEpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFAtualEpActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField17ActionPerformed
+    }//GEN-LAST:event_jTFAtualEpActionPerformed
 
     private void jCBTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBTipoActionPerformed
-        // TODO add your handling code here:
+        String s = String.valueOf(jCBTipo.getSelectedItem());
+        tipo = s;
     }//GEN-LAST:event_jCBTipoActionPerformed
     private JLabel getFirstJLFree(){
         if(!jLGenero1.isVisible()){
@@ -428,6 +478,9 @@ public class TelaAdd extends javax.swing.JFrame {
                 if(this.getFirstJLFree()!=null){
                     this.getFirstJLFree().setText("Ação");
                     this.getFirstJLFree().setVisible(true);
+                    this.an.addGenero(s);
+                    this.fil.addGenero(s);
+                    this.ser.addGenero(s);
                 }
                 
                 break;
@@ -435,105 +488,188 @@ public class TelaAdd extends javax.swing.JFrame {
                 if(this.getFirstJLFree()!=null){
                 this.getFirstJLFree().setText("Animação");
                 this.getFirstJLFree().setVisible(true);
+                    this.an.addGenero(s);
+                    this.fil.addGenero(s);
+                    this.ser.addGenero(s);
                 }
                 break;
             case "Aventura":
                 if(this.getFirstJLFree()!=null){
                 this.getFirstJLFree().setText("Aventura");
                 this.getFirstJLFree().setVisible(true);
+                    this.an.addGenero(s);
+                    this.fil.addGenero(s);
+                    this.ser.addGenero(s);
                 }
                 break;
             case "Classico":
                 if(this.getFirstJLFree()!=null){
                 this.getFirstJLFree().setText("Classico");
                 this.getFirstJLFree().setVisible(true);
+                    this.an.addGenero(s);
+                    this.fil.addGenero(s);
+                    this.ser.addGenero(s);
                 }
                 break;
             case "Comédia":
                 if(this.getFirstJLFree()!=null){
                 this.getFirstJLFree().setText("Comédia");
                 this.getFirstJLFree().setVisible(true);
+                    this.an.addGenero(s);
+                    this.fil.addGenero(s);
+                    this.ser.addGenero(s);
                 }
                 break;
             case "Crime":
                 if(this.getFirstJLFree()!=null){
                 this.getFirstJLFree().setText("Crime");
                 this.getFirstJLFree().setVisible(true);
+                    this.an.addGenero(s);
+                    this.fil.addGenero(s);
+                    this.ser.addGenero(s);
                 }
                 break;
             case "Drama":
                 if(this.getFirstJLFree()!=null){
                 this.getFirstJLFree().setText("Drama");
                 this.getFirstJLFree().setVisible(true);
+                    this.an.addGenero(s);
+                    this.fil.addGenero(s);
+                    this.ser.addGenero(s);
                 }
                 break;
             case "Fantasia":
                 if(this.getFirstJLFree()!=null){
                 this.getFirstJLFree().setText("Fantasia");
                 this.getFirstJLFree().setVisible(true);
+                    this.an.addGenero(s);
+                    this.fil.addGenero(s);
+                    this.ser.addGenero(s);
                 }
                 break;
             case "Ficção Científica":
                 if(this.getFirstJLFree()!=null){
                 this.getFirstJLFree().setText("Ficção");
                 this.getFirstJLFree().setVisible(true);
+                    this.an.addGenero(s);
+                    this.fil.addGenero(s);
+                    this.ser.addGenero(s);
                 }
                 break;
             case "Guerra":
                 if(this.getFirstJLFree()!=null){
                 this.getFirstJLFree().setText("Guerra");
                 this.getFirstJLFree().setVisible(true);
+                    this.an.addGenero(s);
+                    this.fil.addGenero(s);
+                    this.ser.addGenero(s);
                 }
                 break;
             case "Mistério":
                 if(this.getFirstJLFree()!=null){
                 this.getFirstJLFree().setText("Mistério");
                 this.getFirstJLFree().setVisible(true);
+                    this.an.addGenero(s);
+                    this.fil.addGenero(s);
+                    this.ser.addGenero(s);
                 }
                 break;
             case "Suspense":
                 if(this.getFirstJLFree()!=null){
                 this.getFirstJLFree().setText("Suspense");
                 this.getFirstJLFree().setVisible(true);
+                    this.an.addGenero(s);
+                    this.fil.addGenero(s);
+                    this.ser.addGenero(s);
                 }
                 break;
             case "Horror":
                 if(this.getFirstJLFree()!=null){
                 this.getFirstJLFree().setText("Horror");
                 this.getFirstJLFree().setVisible(true);
+                    this.an.addGenero(s);
+                    this.fil.addGenero(s);
+                    this.ser.addGenero(s);
                 }
                 break;
                                         
         }
     }//GEN-LAST:event_jCBGenerosActionPerformed
 
-    private void jCBDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBDiaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCBDiaActionPerformed
+    private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
+        this.an.setNome(jTFNome.getText());
+        this.fil.setNome(jTFNome.getText());
+        this.ser.setNome(jTFNome.getText());
+        
+        this.prod = new Produtora(jTFProdutora.getText());
+        this.an.setProd(prod);
+        this.ser.setProd(prod);
+        this.fil.setProd(prod);
+        
+        this.an.setObs(jTFComent.getText());
+        this.fil.setObs(jTFComent.getText());
+        this.ser.setObs(jTFComent.getText());
+        
+        if(jCBStatus.getSelectedItem().equals("Assistindo")){
+            this.an.setEpAtual(Integer.valueOf(jTFAtualEp.getText()));
+            this.an.setEpTotal(Integer.valueOf(jTFTotalEp.getText()));
+            this.ser.setEpAtual(Integer.valueOf(jTFAtualEp.getText()));
+            this.ser.setEpTotal(Integer.valueOf(jTFTotalEp.getText()));
+        }
+        if(jCBSem.isSelected()){
+            SimpleDateFormat sf = new SimpleDateFormat("EEEE");
+            String diaSemana = sf.format(jXDate.getDate());
+            this.an.setDiaDeLançamento(diaSemana);
+            this.ser.setDiaDeLançamento(diaSemana);
+        }
+        
+        switch (tipo){
+            case "Serie":
+                avl.inserir(this.ser.getId());
+                ger.getSeries().add(ser);
+                ger.getAll().add(ser);
+                break;
+            case "Filme":
+                avl.inserir(fil.getId());
+                ger.getFilmes().add(fil);
+                ger.getAll().add(fil);
+                break;
+            case "Anime":
+                avl.inserir(an.getId());
+                ger.getAnimes().add(an);
+                ger.getAll().add(an);
+                break;
+        }
+        
+        JOptionPane.showMessageDialog(null, "Salvo com sucesso!!!", "Sucesso", 1);
+        
+        for (int i = 0; i < ger.getAll().size(); i++) {
+            System.out.println(ger.getAll().get(i));
+        }
+        
+    }//GEN-LAST:event_jBSalvarActionPerformed
 
-    private void jCBMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBMesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCBMesActionPerformed
+    private void jXDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDateActionPerformed
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        this.an.setDiaDeLançamento(sdf.format(jXDate.getDate()));
+    }//GEN-LAST:event_jXDateActionPerformed
 
-    private void jCBAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBAnoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCBAnoActionPerformed
+    private void jCBSemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBSemActionPerformed
+        
+    }//GEN-LAST:event_jCBSemActionPerformed
 
     /**
      * @param args the command line arguments
      */
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox jCBAno;
-    private javax.swing.JComboBox jCBDia;
+    private javax.swing.JButton jBCancel;
+    private javax.swing.JButton jBSalvar;
     private javax.swing.JComboBox jCBGeneros;
-    private javax.swing.JComboBox jCBMes;
     private javax.swing.JComboBox jCBNota;
+    private javax.swing.JCheckBox jCBSem;
     private javax.swing.JComboBox jCBStatus;
     private javax.swing.JComboBox jCBTipo;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLGenero1;
     private javax.swing.JLabel jLGenero2;
     private javax.swing.JLabel jLGenero3;
@@ -544,20 +680,18 @@ public class TelaAdd extends javax.swing.JFrame {
     private javax.swing.JLabel jLGenero8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPComent;
+    private javax.swing.JPanel jPData1;
     private javax.swing.JPanel jPEpisode;
     private javax.swing.JPanel jPNome;
-    private javax.swing.JPanel jPNome1;
-    private javax.swing.JPanel jPNome2;
     private javax.swing.JPanel jPProdutora;
     private javax.swing.JPanel jPanel33;
     private javax.swing.JTabbedPane jTBPane3;
+    private javax.swing.JTextField jTFAtualEp;
     private javax.swing.JTextField jTFComent;
     private javax.swing.JTextField jTFNome;
-    private javax.swing.JTextField jTFNome1;
-    private javax.swing.JTextField jTFNome2;
     private javax.swing.JTextField jTFProdutora;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField17;
+    private javax.swing.JTextField jTFTotalEp;
+    private org.jdesktop.swingx.JXDatePicker jXDate;
     // End of variables declaration//GEN-END:variables
 
 }

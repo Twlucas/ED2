@@ -5,6 +5,7 @@
  */
 package control;
 
+import estrutura.ArvoreAvl;
 import test.NewJFrame;
 import test.TableFilterSorter;
 import test.TableSearch;
@@ -48,7 +49,16 @@ public class Main {
     }*/
         
         //telatest tt= new telatest();
-        TelaInicial ti = new TelaInicial();
+        /*TelaInicial ti = new TelaInicial();
         ti.setVisible(true);
+        TableSearch ts = new TableSearch();
+        ts.setVisible(true);*/
+        
+        
+        Gerenciador gerenciador = new Gerenciador();
+        ArvoreAvl arvoreAvl = new ArvoreAvl();
+        TelaAdd telaAdd = new TelaAdd(arvoreAvl, gerenciador);
+        //back back1 = new back();
+        
     }
 }

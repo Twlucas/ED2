@@ -161,8 +161,8 @@ public class TelaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAddActionPerformed
-        TelaAdd telaAdd = new TelaAdd();
-        telaAdd.setVisible(true);
+        //TelaAdd telaAdd = new TelaAdd();
+        //telaAdd.setVisible(true);
     }//GEN-LAST:event_jbAddActionPerformed
 
     private void jbAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgendaActionPerformed
